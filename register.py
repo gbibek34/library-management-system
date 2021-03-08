@@ -1,8 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 import tkinter.messagebox
-import login
-from query import librarian
+import Login
+from Query import librarian
 
 
 class registerPage:

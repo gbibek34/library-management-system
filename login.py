@@ -1,13 +1,12 @@
 from tkinter import *
 from tkinter import ttk
 import tkinter.messagebox
-import register
-import home
-from query import librarian
+import Register
+import Home
+from Query import librarian
 
 
 class loginPage:
-
     def __init__(self, window):
         self.wn = window
         self.wn.title("Login")
@@ -64,13 +63,13 @@ class loginPage:
             return
 
     def register(self):
-        self.register = Toplevel(self.wn)
-        register.registerPage(self.register)
+        self.Register = Toplevel(self.wn)
+        Register.registerPage(self.register)
         self.wn.withdraw()
 
     def home(self):
-        self.home = Toplevel(self.wn)
-        home.home(self.home)
+        self.Home = Toplevel(self.wn)
+        Home.home(self.home)
         self.wn.withdraw()
 
 

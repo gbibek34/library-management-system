@@ -2,18 +2,6 @@ import mysql.connector
 
 
 class mydb:
-    '''
-    This class defines the queries used for product entry
-
-    Methods
-    --------
-    executing()
-    executing_id()
-    show()
-    showby()
-    cleartable()
-    '''
-
     def __init__(self):
         self.conn = mysql.connector.connect(host='localhost',
                                             database='library_mgmt',

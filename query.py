@@ -1,4 +1,4 @@
-from connector import mydb
+from Connector import mydb
 
 
 class librarian:

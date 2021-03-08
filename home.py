@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import tkinter.messagebox
+import time
 
 
 class home:
@@ -9,29 +10,33 @@ class home:
         self.wn = window
         self.wn.title("Homepage")
         self.wn.geometry("500x500+500+100")
+        self.Time = time.strftime('%H:%M%p')
 
-        self.header = Label(self.wn, text='LIBRARY MANAGEMENT SYSTEM',
-                            font=('Poppins', 20)).place(x=10, y=10)
+        self.frame = Frame(self.wn, relief=GROOVE, bd=5)
+        self.frame.place(x=10, y=10, width=480, height=480)
 
-        self.username = Label(self.wn, text='Username',
-                              font=('Poppins', 10)).place(x=10, y=60)
+        self.header = Label(self.frame, text='LIBRARY MANAGEMENT SYSTEM',
+                            font=('Poppins', 20)).place(x=30, y=10)
 
-        self.time = Label(self.wn, text='Time', font=(
-            'Poppins', 10)).place(x=100, y=60)
+        self.username = Label(self.frame, text='Username',
+                              font=('Poppins', 10)).place(x=30, y=60)
 
-        self.register_book = Button(self.wn).place()
-        self.register_borrower = Button(self.wn).place()
-        self.lend_book = Button(self.wn).place()
-        self.exit = Button(self.wn).place()
-        self.logout = Button(self.wn).place()
+        self.time = Entry(self.frame, font=('Poppins', 10), width=8)
+        self.time.place(x=380, y=60)
+        self.time.insert(0, self.Time)
 
-
-# def main():
-#     '''Sets the class to work in tkinter'''
-#     window = Tk()
-#     home(window)
-#     window.mainloop()
+        self.register_book = Button(self.frame).place()
+        self.register_borrower = Button(self.frame).place()
+        self.lend_book = Button(self.frame).place()
+        self.exit = Button(self.frame).place()
+        self.logout = Button(self.frame).place()
 
 
-# if __name__ == '__main__':
-#     main()
+def main():
+    window = Tk()
+    home(window)
+    window.mainloop()
+
+
+if __name__ == '__main__':
+    main()
