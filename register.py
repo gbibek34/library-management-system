@@ -19,47 +19,52 @@ class registerPage:
         self.password_val = StringVar()
         self.contact_val = StringVar()
         # =======================================================Labels==================================================
-        self.firstname_lbl = Label(self.wn, text='Firstname :',
-                                   font=('arial', 11)).place(x=80, y=140)
-        self.lastname_lbl = Label(self.wn, text='Lastname :',
-                                  font=('arial', 11)).place(x=80, y=180)
-        self.email_lbl = Label(self.wn, text='E-mail :',
-                               font=('arial', 11)).place(x=80, y=220)
-        self.username_lbl = Label(self.wn, text='Username :',
+        self.frame = Frame(self.wn, relief=GROOVE, bd=5)
+        self.frame.place(x=10, y=10, height=480, width=480)
+        # =======================================================Labels==================================================
+        self.header = Label(self.frame, text='Registration Page',
+                            font=('poppins', 15, 'bold')).place(x=150, y=20)
+        self.firstname_lbl = Label(self.frame, text='Firstname :',
+                                   font=('arial', 11)).place(x=80, y=100)
+        self.lastname_lbl = Label(self.frame, text='Lastname :',
+                                  font=('arial', 11)).place(x=80, y=140)
+        self.email_lbl = Label(self.frame, text='E-mail :',
+                               font=('arial', 11)).place(x=80, y=180)
+        self.username_lbl = Label(self.frame, text='Username :',
+                                  font=('arial', 11)).place(x=80, y=220)
+        self.password_lbl = Label(self.frame, text='Password :',
                                   font=('arial', 11)).place(x=80, y=260)
-        self.password_lbl = Label(self.wn, text='Password :',
-                                  font=('arial', 11)).place(x=80, y=300)
-        self.contact_lbl = Label(self.wn, text='Contact :',
-                                 font=('arial', 11)).place(x=80, y=340)
+        self.contact_lbl = Label(self.frame, text='Contact :',
+                                 font=('arial', 11)).place(x=80, y=300)
         # =======================================================Entries=================================================
-        self.firstname_ent = Entry(self.wn, text='Firstname :',
+        self.firstname_ent = Entry(self.frame, text='Firstname :',
                                    font=('arial', 11), width=22, textvariable=self.firstname_val)
-        self.firstname_ent.place(x=180, y=140)
-        self.lastname_ent = Entry(self.wn, text='Lastname :',
+        self.firstname_ent.place(x=180, y=100)
+        self.lastname_ent = Entry(self.frame, text='Lastname :',
                                   font=('arial', 11), width=22, textvariable=self.lastname_val)
-        self.lastname_ent.place(x=180, y=180)
-        self.email_ent = Entry(self.wn, text='E-mail :',
+        self.lastname_ent.place(x=180, y=140)
+        self.email_ent = Entry(self.frame, text='E-mail :',
                                font=('arial', 11), width=22, textvariable=self.email_val)
-        self.email_ent.place(x=180, y=220)
-        self.username_ent = Entry(self.wn, text='Username:',
+        self.email_ent.place(x=180, y=180)
+        self.username_ent = Entry(self.frame, text='Username:',
                                   font=('arial', 11), width=22, textvariable=self.username_val)
-        self.username_ent.place(x=180, y=260)
-        self.password_ent = Entry(self.wn, text='Password :',
+        self.username_ent.place(x=180, y=220)
+        self.password_ent = Entry(self.frame, text='Password :',
                                   font=('arial', 11), width=22, show='*', textvariable=self.password_val)
-        self.password_ent.place(x=180, y=300)
-        self.contact_ent = Entry(self.wn, text='Contact :',
+        self.password_ent.place(x=180, y=260)
+        self.contact_ent = Entry(self.frame, text='Contact :',
                                  font=('arial', 11), width=22, textvariable=self.contact_val)
-        self.contact_ent.place(x=180, y=340)
+        self.contact_ent.place(x=180, y=300)
         # =======================================================Buttons=================================================
-        self.reg_btn = Button(self.wn, text='Sign Up',
+        self.reg_btn = Button(self.frame, text='Sign Up',
                               height=2, width=12, command=self.addlibrarian)
-        self.reg_btn.place(x=120, y=380)
-        self.reset_btn = Button(self.wn, text='Reset',
+        self.reg_btn.place(x=120, y=340)
+        self.reset_btn = Button(self.frame, text='Reset',
                                 height=2, width=12, command=self.reset)
-        self.reset_btn.place(x=250, y=380)
-        self.login_btn = Button(self.wn, text='Login',
+        self.reset_btn.place(x=250, y=340)
+        self.login_btn = Button(self.frame, text='Login',
                                 height=2, width=12, command=self.login)
-        self.login_btn.place(x=180, y=450)
+        self.login_btn.place(x=180, y=410)
 
     def addlibrarian(self):
         '''Takes in the credentials to add a user after checking existing username'''
@@ -105,5 +110,15 @@ class registerPage:
 
     def login(self):
         self.login = Toplevel(self.wn)
-        login.loginPage(self.login)
+        Login.loginPage(self.login)
         self.wn.withdraw()
+
+
+def main():
+    window = Tk()
+    registerPage(window)
+    window.mainloop()
+
+
+if __name__ == '__main__':
+    main()

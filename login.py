@@ -12,32 +12,36 @@ class loginPage:
         self.wn.title("Login")
         self.wn.geometry("500x500+500+100")
         self.exe = librarian()
-
+        # =======================================================Frame==================================================
+        self.frame = Frame(self.wn, relief=GROOVE, bd=5)
+        self.frame.place(x=10, y=10, height=480, width=480)
         # =======================================================Labels==================================================
-        self.username_lbl = Label(self.wn, text='Username:',
+        self.header = Label(self.frame, text='Login Page',
+                            font=('poppins', 15, 'bold')).place(x=180, y=120)
+        self.username_lbl = Label(self.frame, text='Username:',
                                   font=('arial', 11)).place(x=80, y=200)
-        self.password_lbl = Label(self.wn, text='Password:',
+        self.password_lbl = Label(self.frame, text='Password:',
                                   font=('arial', 11)).place(x=80, y=240)
         # =======================================================Entries=================================================
-        self.username_ent = Entry(self.wn, font=(
+        self.username_ent = Entry(self.frame, font=(
             'arial', 12), width=22)
         self.username_ent.place(x=180, y=200)
-        self.password_ent = Entry(self.wn, font=('arial', 12),
+        self.password_ent = Entry(self.frame, font=('arial', 12),
                                   width=22, show='*')
         self.password_ent.place(x=180, y=240)
-        # ==========================================================================================================
+        # =======================================================Button=================================================
         self.delete_btn = Button(
-            self.wn, text='Delete User', height=2, width=12, command=self.delete_librarian)
+            self.frame, text='Delete User', height=2, width=12, command=self.delete_librarian)
         self.delete_btn.place(x=10, y=10)
-        self.login_btn = Button(self.wn, text='Login',
+        self.login_btn = Button(self.frame, text='Login',
                                 height=2, width=12, command=self.check_login)
         self.login_btn.place(x=120, y=340)
         self.register_btn = Button(
-            self.wn, text='Register', height=2, width=12, command=self.register)
+            self.frame, text='Register', height=2, width=12, command=self.register)
         self.register_btn.place(x=280, y=340)
+    # =======================================================Methods=================================================
 
     def check_login(self):
-        '''Checks username password and user type to open the product and order entry windows'''
         data = self.exe.fetch_librarian()
         for i, j in data:
             if i == self.username_ent.get() and j == self.password_ent.get():
@@ -50,7 +54,6 @@ class loginPage:
                 'Login Failed', 'Invalid Username or Password')
 
     def delete_librarian(self):
-        '''Deletes the user account and details if credentials are correct'''
         data = self.exe.fetch_librarian()
         for i, j in data:
             if i == self.username_ent.get() and j == self.password_ent.get():
@@ -63,12 +66,12 @@ class loginPage:
             return
 
     def register(self):
-        self.Register = Toplevel(self.wn)
+        self.register = Toplevel(self.wn)
         Register.registerPage(self.register)
         self.wn.withdraw()
 
     def home(self):
-        self.Home = Toplevel(self.wn)
+        self.home = Toplevel(self.wn)
         Home.home(self.home)
         self.wn.withdraw()
 
