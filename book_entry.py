@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import tkinter.messagebox
 import Home
+from Query import book
 
 
 class bookEntry:
@@ -9,6 +10,7 @@ class bookEntry:
         self.wn = window
         self.wn.title('Book Entry')
         self.wn.geometry("1055x545+200+100")
+        self.exe = book()
         # ==================================================Entry Data===================================================
         self.bid_val = StringVar()
         self.bname_val = StringVar()
@@ -49,22 +51,19 @@ class bookEntry:
         self.bauthor_ent.place(x=190, y=175)
         # ==================================================Buttons======================================================
         self.add_btn = Button(self.entry_frame, text='ADD',
-                              height=2, width=12)
+                              height=2, width=12, command=self.add)
         self.add_btn.place(x=30, y=280)
         self.update_btn = Button(
-            self.entry_frame, text='UPDATE', height=2, width=12)
+            self.entry_frame, text='UPDATE', height=2, width=12, command=self.update)
         self.update_btn.place(x=160, y=280)
         self.delete_btn = Button(
-            self.entry_frame, text='DELETE', height=2, width=12)
+            self.entry_frame, text='DELETE', height=2, width=12, command=self.delete)
         self.delete_btn.place(x=290, y=280)
         self.reset_btn = Button(
-            self.entry_frame, text='RESET', height=2, width=24)
+            self.entry_frame, text='RESET', height=2, width=24, command=self.reset)
         self.reset_btn.place(x=120, y=340)
-        self.logout_btn = Button(
-            self.option_frame, text='LOGOUT', height=2, width=28)
-        self.logout_btn.pack(side=LEFT)
         self.back_btn = Button(
-            self.option_frame, text='BACK', height=2, width=28)
+            self.option_frame, text='BACK', height=2, width=58, command=self.home)
         self.back_btn.pack(side=LEFT)
         # ==================================================Tree View====================================================
         self.scroll_y = Scrollbar(self.table_frame, orient=VERTICAL)
@@ -86,7 +85,70 @@ class bookEntry:
         self.book_tbl.column("bauthor", width=80)
         self.book_tbl.column("availability", width=10)
         self.book_tbl.pack(fill=BOTH, expand='1')
-        # self.fetch()
+        self.fetch()
+
+    # ==========================================================Methods=================================================
+    def add(self):
+        if self.bname_val.get() == '' or self.bgenre_val.get() == '' or self.bauthor_val.get() == '':
+            tkinter.messagebox.showerror(
+                'Error', 'Dont leave the fields empty.')
+        else:
+            self.exe.add_book(self.bname_val.get(),
+                              self.bgenre_val.get(), self.bauthor_val.get())
+            self.fetch()
+            self.reset()
+
+    def update(self):
+        if self.bid_val.get() == '' or self.bname_ent.get() == '' or self.bgenre_val.get() == '' or \
+                self.bauthor_val.get() == '':
+            tkinter.messagebox.showerror(
+                'Error', 'Dont leave the fields empty.')
+        else:
+            self.exe.update_book(self.bname_ent.get(), self.bgenre_val.get(
+            ), self.bauthor_val.get(), self.bid_val.get())
+            self.fetch()
+            return True
+
+    def delete(self):
+        '''Deletes an added product'''
+        self.exe.delete_book(self.bid_val.get())
+        self.reset()
+        self.fetch()
+
+    def reset(self):
+        '''Clears the data in the entry and combo boxes'''
+        self.bid_val.set('')
+        self.bname_val.set('')
+        self.bgenre_val.set('')
+        self.bauthor_val.set('')
+
+    def fetch(self):
+        '''Takes in the data from database and inserts in treeview'''
+        data = self.exe.fetch_book()
+        self.book_tbl.delete(*self.book_tbl.get_children())
+        for i in data:
+            self.book_tbl.insert("", "end", value=i)
+        self.book_tbl.bind('<Double-1>', self.select)
+
+    def select(self, event):
+        '''Selects the data clicked in treeview'''
+        self.row = self.book_tbl.item(
+            self.book_tbl.selection(), "values")
+        self.id = self.row[0]
+        self.fill()
+
+    def fill(self):
+        '''Fills in the selected data from treeview'''
+        self.reset()
+        self.bid_val.set(self.row[0])
+        self.bname_val.set(self.row[1])
+        self.bgenre_val.set(self.row[2])
+        self.bauthor_val.set(self.row[3])
+
+    def home(self):
+        self.home = Toplevel(self.wn)
+        Home.home(self.login)
+        self.wn.withdraw()
 
 
 def main():

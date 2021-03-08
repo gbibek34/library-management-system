@@ -22,3 +22,51 @@ class librarian:
         query = "DELETE FROM librarian WHERE username=%s"
         values = (values,)
         return self.exe.executing(query, values)
+
+
+class book:
+    def __init__(self):
+        self.exe = mydb()
+
+    def add_book(self, name, genre, author):
+        query = "INSERT INTO book (book_name, genre, author) VALUES (%s,%s,%s)"
+        values = (name, genre, author)
+        return self.exe.executing(query, values)
+
+    def update_book(self, name, genre, author, id):
+        query = "UPDATE book SET book_name=%s, genre=%s, author=%s WHERE book_id=%s"
+        values = (name, genre, author, id)
+        return self.exe.executing(query, values)
+
+    def delete_book(self, values):
+        query = "DELETE FROM book WHERE book_id=%s"
+        values = (values,)
+        return self.exe.executing(query, values)
+
+    def fetch_book(self):
+        query = "SELECT * FROM book"
+        return self.exe.show(query)
+
+
+class borrower:
+    def __init__(self):
+        self.exe = mydb()
+
+    def add_borrower(self, fname, lname, contact, email):
+        query = "INSERT INTO borrower (fname, lname, contact, email) VALUES (%s,%s,%s,%s)"
+        values = (fname, lname, contact, email)
+        return self.exe.executing(query, values)
+
+    def update_borrower(self, fname, lname, contact, email, id):
+        query = "UPDATE borrower SET fname=%s, lname=%s, contact=%s, email=%s WHERE borrower_id=%s"
+        values = (fname, lname, contact, email, id)
+        return self.exe.executing(query, values)
+
+    def delete_borrower(self, values):
+        query = "DELETE FROM borrower WHERE borrower_id=%s"
+        values = (values,)
+        return self.exe.executing(query, values)
+
+    def fetch_borrower(self):
+        query = "SELECT * FROM borrower"
+        return self.exe.show(query)
