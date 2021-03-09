@@ -117,13 +117,11 @@ class borrowerEntry:
             return True
 
     def delete(self):
-        '''Deletes an added product'''
         self.exe.delete_borrower(self.id_val.get())
         self.reset()
         self.fetch()
 
     def reset(self):
-        '''Clears the data in the entry and combo boxes'''
         self.id_val.set('')
         self.fname_val.set('')
         self.lname_val.set('')
@@ -131,7 +129,6 @@ class borrowerEntry:
         self.email_val.set('')
 
     def fetch(self):
-        '''Takes in the data from database and inserts in treeview'''
         data = self.exe.fetch_borrower()
         self.borrower_tbl.delete(*self.borrower_tbl.get_children())
         for i in data:
@@ -156,15 +153,15 @@ class borrowerEntry:
 
     def home(self):
         self.home = Toplevel(self.wn)
-        Home.home(self.login)
+        Home.home(self.home)
         self.wn.withdraw()
 
 
-def main():
-    window = Tk()
-    borrowerEntry(window)
-    window.mainloop()
+# def main():
+#     window = Tk()
+#     borrowerEntry(window)
+#     window.mainloop()
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()

@@ -147,15 +147,15 @@ class bookEntry:
 
     def home(self):
         self.home = Toplevel(self.wn)
-        Home.home(self.login)
+        Home.home(self.home)
         self.wn.withdraw()
 
 
-def main():
-    window = Tk()
-    bookEntry(window)
-    window.mainloop()
+# def main():
+#     window = Tk()
+#     bookEntry(window)
+#     window.mainloop()
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()

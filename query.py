@@ -70,3 +70,41 @@ class borrower:
     def fetch_borrower(self):
         query = "SELECT * FROM borrower"
         return self.exe.show(query)
+
+
+class issue:
+    def __init__(self):
+        self.exe = mydb()
+
+    def add_issue(self, bid, bname, brname, contact):
+        query = "INSERT INTO book_issue (book_id, book_name, borrower_name, contact) VALUES (%s,%s,%s,%s)"
+        values = (bid, bname, brname, contact)
+        return self.exe.executing(query, values)
+
+    def update_book_issue(self, id):
+        query = "UPDATE book SET availability='No' WHERE book_id=%s"
+        values = (id,)
+        return self.exe.executing(query, values)
+
+    def return_issue(self, values):
+        query = "DELETE FROM book_issue WHERE issue_id=%s"
+        values = (values,)
+        return self.exe.executing(query, values)
+
+    def update_book_return(self, id):
+        query = "UPDATE book SET availability='Yes' WHERE book_id=%s"
+        values = (id,)
+        return self.exe.executing(query, values)
+
+    def fetch_issue(self):
+        query = "SELECT * FROM book_issue"
+        return self.exe.show(query)
+
+    def fetch_book(self):
+        query = "SELECT book_name FROM book WHERE availability='Yes'"
+        return self.exe.show(query)
+
+    def fetch_book_id(self, bname):
+        query = "SELECT book_id FROM book WHERE book_name=%s"
+        values = (bname,)
+        return self.exe.show_by(query, values)

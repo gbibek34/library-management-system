@@ -12,7 +12,10 @@ class loginPage:
         self.wn.title("Login")
         self.wn.geometry("500x500+500+100")
         self.exe = librarian()
-        # =======================================================Frame==================================================
+        # Strings
+        self.username_val = StringVar()
+        self.password_val = StringVar()
+        # Frame
         self.frame = Frame(self.wn, relief=GROOVE, bd=5)
         self.frame.place(x=10, y=10, height=480, width=480)
         # =======================================================Labels==================================================
@@ -24,10 +27,10 @@ class loginPage:
                                   font=('arial', 11)).place(x=80, y=240)
         # =======================================================Entries=================================================
         self.username_ent = Entry(self.frame, font=(
-            'arial', 12), width=22)
+            'arial', 12), width=22, textvariable=self.username_val)
         self.username_ent.place(x=180, y=200)
         self.password_ent = Entry(self.frame, font=('arial', 12),
-                                  width=22, show='*')
+                                  width=22, show='*', textvariable=self.password_val)
         self.password_ent.place(x=180, y=240)
         # =======================================================Button=================================================
         self.delete_btn = Button(
@@ -60,10 +63,15 @@ class loginPage:
                 self.exe.delete_librarian(self.username_ent.get())
                 tkinter.messagebox.showinfo(
                     'Success', 'User removed successfully')
+                self.reset()
                 return
         else:
             tkinter.messagebox.showerror('Failed', 'Check your credentials')
             return
+
+    def reset(self):
+        self.username_val.set('')
+        self.password_val.set('')
 
     def register(self):
         self.register = Toplevel(self.wn)
