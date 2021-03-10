@@ -23,3 +23,7 @@ class unitTesting(unittest.TestCase):
     def test_issue_fetch(self):
         result = self.obj3.fetch_issue()
         self.assertNotEqual(result, False)
+
+
+if __name__ == '__main__':
+    unittest.main()

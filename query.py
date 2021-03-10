@@ -84,3 +84,9 @@ class issue:
         query = "SELECT book_id FROM book WHERE book_name=%s"
         values = (bname,)
         return self.exe.show_by(query, values)
+
+    def search_data(self, search):
+        search = search + '%'
+        query = "select * from book_issue where borrower_name like %s order by borrower_name"
+        values = (search,)
+        return self.exe.show_by(query, values)

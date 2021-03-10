@@ -20,9 +20,18 @@ class bookIssue:
         self.entry_frame = Frame(self.wn, relief=GROOVE, bd=5)
         self.entry_frame.place(x=10, y=10, width=430, height=530)
         self.table_frame = Frame(self.wn, relief=GROOVE, bd=5)
-        self.table_frame.place(x=450, y=10, width=600, height=530)
+        self.table_frame.place(x=450, y=40, width=600, height=500)
         self.option_frame = Frame(self.entry_frame, relief=GROOVE, bd=5)
         self.option_frame.place(x=0, y=470, width=420, height=50)
+        self.search_ent = Entry(self.wn, font=(
+            'arial', 12), width=49,)
+        self.search_ent.place(x=450, y=10)
+        self.search_btn = Button(
+            self.wn, text='Search', command=self.fetch_data)
+        self.search_btn.place(x=920, y=8)
+        self.searchall_btn = Button(
+            self.wn, text='Search all', command=self.fetch)
+        self.searchall_btn.place(x=980, y=8)
         # ==================================================Labels=======================================================
         self.iid_lbl = Label(
             self.entry_frame, text='Issue ID :', font=('arial', 11))
@@ -132,6 +141,15 @@ class bookIssue:
     def bookid_fetch(self, event):
         data = self.exe.fetch_book_id(self.bname_ent.get())
         self.bid_val.set(data[0][0])
+
+    def fetch_data(self):
+        data = self.exe.search_data(self.search_ent.get())
+        print(data)
+        if len(data) != 0:
+            self.issue_tbl.delete(*self.issue_tbl.get_children())
+            for i in data:
+                self.issue_tbl.insert(
+                    "", "end", value=(i[0], i[2], i[3], i[4]))
 
     def fetch(self):
         '''Takes in the data from database and inserts in treeview'''

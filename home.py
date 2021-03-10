@@ -4,7 +4,6 @@ import tkinter.messagebox
 import time
 import Login
 import Book_entry
-import Borrower_entry
 import Book_issue
 
 
