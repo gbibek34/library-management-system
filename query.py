@@ -48,30 +48,6 @@ class book:
         return self.exe.show(query)
 
 
-class borrower:
-    def __init__(self):
-        self.exe = mydb()
-
-    def add_borrower(self, fname, lname, contact, email):
-        query = "INSERT INTO borrower (fname, lname, contact, email) VALUES (%s,%s,%s,%s)"
-        values = (fname, lname, contact, email)
-        return self.exe.executing(query, values)
-
-    def update_borrower(self, fname, lname, contact, email, id):
-        query = "UPDATE borrower SET fname=%s, lname=%s, contact=%s, email=%s WHERE borrower_id=%s"
-        values = (fname, lname, contact, email, id)
-        return self.exe.executing(query, values)
-
-    def delete_borrower(self, values):
-        query = "DELETE FROM borrower WHERE borrower_id=%s"
-        values = (values,)
-        return self.exe.executing(query, values)
-
-    def fetch_borrower(self):
-        query = "SELECT * FROM borrower"
-        return self.exe.show(query)
-
-
 class issue:
     def __init__(self):
         self.exe = mydb()
